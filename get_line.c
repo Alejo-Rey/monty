@@ -19,7 +19,7 @@ int get_line(FILE *file)
 
 		if (isNumeric(temp) == 0)
 			number = atoi(temp);
-		else if (strcmp(token, p) == 0 && isNumeric(temp) != 0)
+		else if (token && strcmp(token, p) == 0 && isNumeric(temp) != 0)
 		{
 			fprintf(stderr, "L%d%s\n", ++line_number, msg);
 			exit(EXIT_FAILURE);
