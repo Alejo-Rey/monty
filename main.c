@@ -38,7 +38,7 @@ int main(int ac, char **av)
 				if (strcmp(inst[count].opcode, token) == 0)
 				{
 					inst[count].f(&head, ++line_number);
-					//printf("token = %s inst = %s\n", token, inst[count].opcode);
+					printf("number = %d", number);
 				}
 			}
 			token = strtok(NULL, " \n");
@@ -58,7 +58,6 @@ int main(int ac, char **av)
 			else
 				continue;
 		}
-		//printf("%d : %s\n", ++line_number, buf);
 	}
 
 	return (0);
