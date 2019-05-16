@@ -1,39 +1,33 @@
 #include "monty.h"
 /**
- *
- *
- *
+ * get_line - function to get in lines the file
+ * @file: the file to convert in lines
+ * Return: 0 in success
  */
 int get_line(FILE *file)
 {
-	int line_number = 0, count;
-	char *buf = NULL, *token, *temp;
-	size_t  buf_int = 0;
+	int line_number = 0;
 	stack_t *head = NULL;
-	char * msg = " unknown instruction ";
-	instruction_t inst[] = {
-		{"pall", pall},
-		{"push", push},
-		{NULL, NULL}
-	};
+	char *buf = NULL, *token, *temp, *msg = ": usage: push integer";
+	char *p = "push";
+	size_t buf_int = 0;
+
 	while (-1 != getline(&buf, &buf_int, file))
 	{
 		token = strtok(buf, " \n");
 		temp = strtok(NULL, " \n");
+
+		if (isNumeric(temp) == 0)
+			number = atoi(temp);
+		else if (strcmp(token, p) == 0 && isNumeric(temp) != 0)
+		{
+			fprintf(stderr, "L%d%s\n", ++line_number, msg);
+			exit(EXIT_FAILURE);
+		}
 		if (token != NULL)
 		{
-			if (isNumeric(temp) == 0)
-				number = atoi(temp);
-			for (count = 0; inst[count].opcode != NULL; count++)
-			{
-				if (strcmp(inst[count].opcode, token) == 0)
-				{
-					inst[count].f(&head, ++line_number);
-					break;
-				}
-				else
-					fprintf(stderr, "L%d:%s%s\n",line_number, msg, buf);
-			}
+			if (_execute(&head, token, line_number) != 1)
+				line_number++;
 		}
 	}
 	free_dlistint(head);

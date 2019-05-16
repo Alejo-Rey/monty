@@ -7,13 +7,20 @@
 
 int isNumeric(const char *str)
 {
+	int i = 0;
+
 	if (str == NULL)
 		return (1);
-	while (*str != '\0')
+	if (str[0] == 45)
+		i++;
+	while (str[i] != '\0')
 	{
-		if (*str < '0' || *str > '9')
+
+		if (str[i] < 47 || str[i] > 58)
+		{
 			return (1);
-		str++;
+		}
+		i++;
 	}
 	return (0);
 }
