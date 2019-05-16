@@ -3,8 +3,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
-#include <fcntl.h>
 #include <string.h>
 #include <stddef.h>
 
@@ -40,6 +38,7 @@ typedef struct instruction_s
         void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
+int get_line(FILE *file);
 int isNumeric(const char *str);
 void (*get_function)(stack_t **stack, unsigned int line_number);
 void push(stack_t **head, unsigned int n);
@@ -49,6 +48,6 @@ void pint(stack_t *head, unsigned int n);
 void swap(stack_t *head, unsigned int n);
 void add(stack_t *head, unsigned int n);
 void nop(stack_t *head, unsigned int n);
-
+void free_dlistint(stack_t *head);
 
 #endif /* HOLBERTON_H */
