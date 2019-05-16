@@ -11,7 +11,7 @@ int main(int ac, char **av)
 {
 	int line_number = 0, count;
 	FILE *file;
-	char *buf = NULL, *token;
+	char *buf = NULL, *token, *temp;
 	size_t buf_int = 0;
 	stack_t *head = NULL;
 	instruction_t inst[] = {
@@ -33,30 +33,27 @@ int main(int ac, char **av)
 		while (token != NULL)
 		{
 
-			for (count = 0; inst[count].opcode != NULL; count++)
-			{
-				if (strcmp(inst[count].opcode, token) == 0)
-				{
-					inst[count].f(&head, ++line_number);
-					printf("number = %d", number);
-				}
-			}
 			token = strtok(NULL, " \n");
-			if (token == NULL)
+			if (token != NULL)
 			{
-				break;
-			}
-			if (strlen(token) == 1)
-			{
-				if (isNumeric(token) == 0)
+				if (strlen(token) == 1)
 				{
-					number = atoi(token);
+					if (isNumeric(token) == 0)
+					{
+						number = atoi(token);
+					}
+					else
+						printf("EL token es = %s\n",token);
 				}
-				else
-					printf("EL token es = %s\n",token);
+				for (count = 0; inst[count].opcode != NULL; count++)
+				{
+					if (strcmp(inst[count].opcode, buf) == 0)
+					{
+						inst[count].f(&head, ++line_number);
+					}
+				}
 			}
-			else
-				continue;
+
 		}
 	}
 
